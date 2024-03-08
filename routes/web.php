@@ -35,7 +35,8 @@ Route::get('/', function () {
 Route::get('/home', [DocumentController::class, 'showAll'])->name('home')->middleware('isAdmin');
 Route::get('/homeUser', [DocumentController::class, 'showAllUser'])->name('homeUser');
 
-Route::get('/sort-Title',[DocumentController::class, 'sortTitle'])->name('sort');
+Route::get('/sort-Title-admin',[DocumentController::class, 'sortTitleAdmin'])->name('sortAdmin');
+Route::get('/sort-Title-user',[DocumentController::class, 'sortTitleUser'])->name('sortUser');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
@@ -54,12 +55,13 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/update/{id}', [DocumentController::class, 'update'])->name('updatefile');
     Route::delete('/delete/{id}', [DocumentController::class, 'delete'])->name('delete');
     Route::get('/homeAdmin/search-process', [DocumentController::class, "searchProcessAdmin"])->name('searchProcessAdmin');
+    Route::get('/view/{id}', [DocumentController::class, 'versionPageAdmin'])->name('versionpageAdmin');
 });
 
 Route::get('/home/search-process', [DocumentController::class, "searchProcess"])->name('searchProcess');
 
 
-Route::get('/view/{id}', [DocumentController::class, 'versionPage'])->name('versionpage');
+Route::get('/viewuser/{id}', [DocumentController::class, 'versionPage'])->name('versionpage');
 Route::get('/download/{id}', [DocumentController::class, 'downloaddoc'])->name('downloaddoc');
 
 

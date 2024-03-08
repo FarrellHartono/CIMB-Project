@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class DocumentController extends Controller
 {
 
-    public function sortTitle(Request $request){
+    public function sortTitleAdmin(Request $request){
         $sortBy = $request->query('sort_by', 'title'); 
         $sortOrder = $request->query('sort_order', 'asc'); 
     
@@ -19,7 +19,15 @@ class DocumentController extends Controller
         return view('home', compact('docs'));
     }
 
+    public function sortTitleUser(Request $request){
+        $sortBy = $request->query('sort_by', 'title'); 
+        $sortOrder = $request->query('sort_order', 'asc'); 
     
+        $docs = Documents::orderBy($sortBy, $sortOrder)->get();
+        return view('homeUser', compact('docs'));
+    }
+    
+
     public function showAll(Request $request){
         // $sortBy = $request->query('sort_by', 'title'); 
         // $sortOrder = $request->query('sort_order', 'asc'); 
@@ -41,7 +49,7 @@ class DocumentController extends Controller
 
     public function upload(Request $request){
         $request->validate([
-            'title'=> 'required',
+            'title'=> 'required|max: 20|unique:document',
             'description'=> 'required|max:50',
             'file' => 'required|file|mimes:pdf|max:3000'
         ]);
@@ -72,6 +80,12 @@ class DocumentController extends Controller
     }
 
     public function versionPage($id){
+        $ver = Version::where('file_id', $id)->get();
+        $doc = Documents::where('file_id', $id)->first();
+        return view('viewuser', compact('ver', 'doc'));
+    }
+
+    public function versionPageAdmin($id){
         $ver = Version::where('file_id', $id)->get();
         $doc = Documents::where('file_id', $id)->first();
         return view('view', compact('ver', 'doc'));

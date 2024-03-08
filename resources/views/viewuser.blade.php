@@ -3,13 +3,13 @@
   View
 @endsection
 
-@extends('layout.navbar')
+@extends('layout.navbaruser')
 
 
 @section('content')
   <div class="div0">
-    <div class="div">
-      <div class="div-2" style="text-align: left;">{{ $doc->title }}</div>
+    <div class="div" style="word-wrap: break-word">
+      <div class="div-2" style="text-align: left;"> {{ $doc->title }}</div>
       <div class="div-3">
         {{ $doc->description }}
       </div>
@@ -27,7 +27,7 @@
             <tr>
 
               <td>{{ $ver->created_at }}</td>
-              <td>{{ $ver->description }}</td>
+              <td style="max-width: 113vh;">{{ $ver->description }}</td>
               <td>
                 <a href="{{ route('downloaddoc', $ver->file) }}"><img src="../assets/Download.png" alt="Logo"
                     style="width: 30px; height: auto; margin-left: 10px; object-fit: cover;"></a>
@@ -36,9 +36,7 @@
           @endforeach
         </tbody>
       </table>
-      <form action="{{ route('updatepage', $doc->file_id) }}" method="GET">
-        <button type="submit" class="div-4 btn btn-danger mb-4 mx-auto">Update Document</button>
-      </form>
+
     </div>
   </div>
 
@@ -50,8 +48,24 @@
       </path>
     </svg>
   </div>
+  <div class="kotak">
+
+  </div>
 
   <style>
+    .kotak {
+      box-shadow: 4.694px 9.389px 9.295px -2.817px rgba(121, 0, 8, 0.35);
+      background-color: #790008;
+      display: flex;
+      margin: 0 0 0 0;
+      /* Updated margin to make it full-width */
+      align-items: center;
+      width: 100%;
+      flex-direction: column;
+      padding: 50px 20px;
+      position: sticky;
+    }
+
     .div-4 {
       justify-content: center;
       align-items: center;
@@ -73,37 +87,37 @@
     }
 
     .transparent-table {
-      margin-top: 50px;
+      table-layout: fixed;
       width: 100%;
       border-collapse: collapse;
       background-color: transparent;
-      overflow-y: auto;
+      max-height: 300px;
+      overflow-y: scroll;
       display: block;
     }
 
     .transparent-table td {
-
+      color: #9C0404;
       padding: 10px;
-      background-color: transparent;
-      border-bottom: 1px solid #ffff;
+      border-bottom: 1px solid #9C0404;
       border-collapse: separate;
       border: none;
-      border-bottom: 2px solid #790008;
-      font: 700 20px Poppins, sans-serif;
-      color: #9c0404;
+      display: table-cell;
+      font: 20px Poppins, sans-serif;
+      border-bottom: 2px solid #ffff;
+      word-wrap: break-word;
+      width: 100%;
     }
 
     .transparent-table th {
-      padding: 10px;
-      border-bottom: 1px solid #ffff;
       border-collapse: separate;
       border: none;
       background-color: #9C0404;
-      font: 700 20px Poppins, sans-serif;
       color: white;
+      font: 700 20px Poppins, sans-serif;
+      min-width: 65vh;
       position: sticky;
       top: 0;
-      min-width: 65.5vh;
     }
 
     .div0 {
@@ -112,7 +126,7 @@
       flex-direction: column;
       align-items: center;
       padding: 0 20px;
-      
+
     }
 
     .div {
@@ -125,14 +139,15 @@
       width: 100%;
       flex-direction: column;
     }
-  .div-2 {
-    color: #9c0404;
-    text-decoration-line: underline;
-    align-self: center;
-    white-space: nowrap;
-    font: 700 45px Poppins, sans-serif;
-    margin-top: 60px;
-  }
+
+    .div-2 {
+      color: #9c0404;
+      text-decoration-line: underline;
+      align-self: center;
+      white-space: nowrap;
+      font: 700 45px Poppins, sans-serif;
+      margin-top: 60px;
+    }
 
 
     @media (max-width: 991px) {
@@ -148,6 +163,8 @@
       margin-top: 30px;
       width: 100%;
       font: 700 25px Poppins, sans-serif;
+      /* width: 10vh; */
+      word-wrap: break-word;
     }
 
     @media (max-width: 991px) {
