@@ -24,7 +24,6 @@ class AdminMiddleware
             }
         }
 
-         // kalau bukan abort 403
          return redirect('login')->witherror('Unauthorized Role');
 
     }

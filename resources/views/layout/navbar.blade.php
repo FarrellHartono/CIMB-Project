@@ -10,7 +10,6 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div>
-      {{-- @dd($user); --}}
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div style="color: #9C0404;" class="poppins-reguler">Welcome, <a id="welcomeText"></a></div>
         <ul class="navbar-nav">
